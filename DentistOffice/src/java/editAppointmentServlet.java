@@ -35,11 +35,13 @@ public class editAppointmentServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            //creating new seesion
             HttpSession session = request.getSession();
-            
+            // check used on createAppointment.jsp to check to see if user already has appointment
             String check = "x";
             session.setAttribute("check", check);
             
+            // forwarding to createAppointment.jsp
             RequestDispatcher rd = request.getRequestDispatcher("createAppointment.jsp");
             rd.forward(request, response);
         }

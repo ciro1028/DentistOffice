@@ -21,13 +21,17 @@
 </head>
 <body>
     <%
+        // creating objects to be used in this jsp
         Dentists dentist = new Dentists();
-        dentist = (Dentists)session.getAttribute("dentist");
         ArrayList aList = new ArrayList();
-        aList = dentist.getAppointmentList(dentist.getId());
         Appointments appointment = new Appointments();
         Patients patient = new Patients();
         Procedures procedure = new Procedures();
+        
+        // getting dentist from session
+        dentist = (Dentists)session.getAttribute("dentist");
+        // getting the list of appointments from the Dentist class
+        aList = dentist.getAppointmentList(dentist.getId());
     %>    
     <div class="homeContainer">
         <div class="homeHeader">
@@ -59,6 +63,7 @@
                             <th>Procedure</th>
                         </tr>
                         <%
+                            //for loop to show each appointment in the table
                             for (Object app : aList) {
                                 appointment = (Appointments)app;
                         %>

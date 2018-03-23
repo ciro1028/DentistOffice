@@ -11,6 +11,12 @@ import java.sql.*;
  *
  * @author Ciro
  */
+/************************
+ * 
+ * Class to select, insert, and delete appointments from database
+ * 
+ * @author Ciro
+ ***********************/
 public class Appointments {
     private String apptDateTime;
     private String patId;
@@ -23,7 +29,14 @@ public class Appointments {
         dentId = "";
         procCode = "";
     }
-
+    
+    /*******************
+     * 
+     * @param apptDateTime
+     * @param patId
+     * @param dentId
+     * @param procCode 
+     *******************/
     public void Appointments(String apptDateTime, String patId, String dentId, String procCode) {
         this.apptDateTime = apptDateTime;
         this.patId = patId;
@@ -65,10 +78,11 @@ public class Appointments {
     
     /***********************
      * 
-     * Select appointments from database depending who requested. 
+     * Select appointments from database depending on who requested. 
      * 
      * @param column
      * @param field 
+     * 
      ***********************/
     public void selectAppointment(String column, String field){
         String sql = "select * from appointments where " + column + "= '" + field + "'";
@@ -100,6 +114,7 @@ public class Appointments {
      * @param patId
      * @param dentId
      * @param procCode 
+     * 
      *******************/
     public void insertDB(String apptDateTime, String patId, String dentId,
             String procCode){
@@ -126,7 +141,13 @@ public class Appointments {
             System.out.println("Error: " + e.getMessage());
         }  
     }
-    
+    /***********************
+     * 
+     * Method to delete appointment from database
+     * 
+     * @param patId 
+     * 
+     **********************/
     public void deleteDB(String patId){
         String sql = "delete from appointments where patId = '" + patId + "'";
         

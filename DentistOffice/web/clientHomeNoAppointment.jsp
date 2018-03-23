@@ -18,11 +18,14 @@
 </head>
 <body class="homeBody">
     <%  
+        // instatiating objects to be used in this jsp
         Patients patient = new Patients();
-        patient = (Patients)session.getAttribute("patient"); 
         Appointments appointment = new Appointments();
-        appointment.selectAppointment("patId", patient.getPatId());
+        // gettin patient from session
+        patient = (Patients)session.getAttribute("patient"); 
         
+        // selecting appointent with the right patient
+        appointment.selectAppointment("patId", patient.getPatId());
     %>
     <div class="homeContainer">
         <div class="homeHeader">

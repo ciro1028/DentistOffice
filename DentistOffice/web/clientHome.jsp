@@ -18,13 +18,18 @@
 </head>
 <body class="homeBody">
     <%  
+        // instantiating objects to be used in this jsp
         Patients patient = new Patients();
-        patient = (Patients)session.getAttribute("patient"); 
         Appointments appointment = new Appointments();
-        appointment.selectAppointment("patId", patient.getPatId());
         Dentists dentist = new Dentists();
-        dentist.selectDentist(appointment.getDentId());
         Procedures procedure = new Procedures();
+        
+        // getting patient from session
+        patient = (Patients)session.getAttribute("patient"); 
+        
+        //selecting the right objects from database
+        appointment.selectAppointment("patId", patient.getPatId());
+        dentist.selectDentist(appointment.getDentId());
         procedure.selectProcedure(appointment.getProcCode());
     %>
     <div class="homeContainer">

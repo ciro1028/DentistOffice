@@ -10,10 +10,12 @@ import java.util.ArrayList;
 import Business.*;
 
 
-/**
+/**************************
+ * 
+ * Class to select, insert, update dentists. And to get a list of appointments based on dentist.
  *
  * @author Ciro
- */
+ *************************/
 public class Dentists {
     private String id;
     private String password;
@@ -31,6 +33,15 @@ public class Dentists {
         office = "";
     }
 
+    /********************
+     * 
+     * @param id
+     * @param password
+     * @param firstName
+     * @param lastName
+     * @param email
+     * @param office 
+     ********************/
     public void Dentists(String id, String password, String firstName, String lastName, String email, String office) {
         this.id = id;
         this.password = password;
@@ -224,10 +235,10 @@ public class Dentists {
         
     }
     
-    public static void main(String[] args){
+    /*public static void main(String[] args){
         Dentists dentist = new Dentists();
         dentist.selectDentist("D201");
         System.out.println(dentist.getFirstName() + " " + dentist.getLastName());
-    }
+    }*/
 }
 

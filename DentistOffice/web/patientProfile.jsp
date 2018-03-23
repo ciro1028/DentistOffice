@@ -18,11 +18,15 @@
 </head>
 <body class="homeBody">
     <%  
-        
+        // intantiating objects to be used in this page
         Patients patient = new Patients();
+        // getting patient from the current session
         patient = (Patients)session.getAttribute("patient");
+        // selecting current patient from the database
         patient.selectPatient(patient.getPatId());
+        // message to be displayed when profile is updated
         String successMsg = (String)session.getAttribute("successMsg");
+        // if statement to reset success message string to null
         if (successMsg == null) {
             successMsg = "";
         }

@@ -34,13 +34,15 @@ public class logoutServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
+            // creating new session
             HttpSession session = request.getSession();
+            // removing all objects from session
             session.removeAttribute("patient");
             session.removeAttribute("dentist");
             session.removeAttribute("procedure");
             session.removeAttribute("appointment");
             session.removeAttribute("successMsg");
+            session.removeAttribute("check");
             
             RequestDispatcher rd = request.getRequestDispatcher("index.html");
         }

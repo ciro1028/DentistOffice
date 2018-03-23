@@ -14,10 +14,12 @@
         <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
-    
     <%
+        // getting password of current user from session
         String password = (String)session.getAttribute("password");
+        // getting usernname of current user from session
         String user = (String)session.getAttribute("user");
+        // if statement to reset password and user string to empty
         if (password == null){
             password = "";
         }

@@ -6,10 +6,12 @@
 package Business;
 import java.sql.*;
 
-/**
+/****************************
  *
+ * Class to select procedures from database.
+ * 
  * @author Ciro
- */
+ **************************/
 public class Procedures {
     private String procCode;
     private String procName;
@@ -22,7 +24,13 @@ public class Procedures {
         procDesc = "";
         cost = "";
     }
-
+    /******************
+     * 
+     * @param procCode
+     * @param procName
+     * @param procDesc
+     * @param cost 
+     ******************/
     public void Procedures(String procCode, String procName, String procDesc, String cost) {
         this.procCode = procCode;
         this.procName = procName;
@@ -61,7 +69,12 @@ public class Procedures {
     public void setCost(String cost) {
         this.cost = cost;
     }
-    
+    /****************************
+     * 
+     * Select procedures from database.
+     * 
+     * @param procCode 
+     ***************************/
     public void selectProcedure(String procCode){
         String sql = "select * from Procedures where procCode = '" + procCode + "'";
         
@@ -86,13 +99,12 @@ public class Procedures {
         }
     }
     
-    public static void main(String[] args){
+    /*public static void main(String[] args){
         Procedures procedure = new Procedures();
         procedure.selectProcedure("P114");
-        
         System.out.println("Code: " + procedure.getProcCode());
         System.out.println("Name: " + procedure.getProcName());
         System.out.println("Description: " + procedure.getProcDesc());
         System.out.println("Cost: $" + procedure.getCost());
-    }
+    }*/
 }

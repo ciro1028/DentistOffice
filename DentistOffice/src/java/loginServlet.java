@@ -35,44 +35,59 @@ public class loginServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            
+            //instatiating objects to be used in this servlet
+            Patients patient = new Patients();
+            Dentists dentist = new Dentists();
+            Appointments appointment = new Appointments();
+            // getting username and password enterd by the user in the login.jsp
             String enteredUsername = request.getParameter("username");
             String enteredPassword = request.getParameter("password");
             
-            Patients patient = new Patients();
+            //seleceting patient on the database based on the username entered
             patient.selectPatient(enteredUsername);
-            
-            Dentists dentist = new Dentists();
+            //seleceting detist on the database based on the username entered
             dentist.selectDentist(enteredUsername);
-            
+            // creating new session
             HttpSession session = request.getSession();
             
+            // if statement to determine if user is a dentist, a patient, or if it exists at all
             if (patient.getPatId() == null && dentist.getId() == null){
+                //if user doesn't exist send it to error page
                 RequestDispatcher rd = request.getRequestDispatcher("/errorLogin.jsp");
                 rd.forward(request, response);
+                // if user is a patient
             } else if (patient.getPatId() != null){
+                //if statement to check if user entered correct password
                 if (enteredPassword.equals(patient.getPassword())){
+                    // entered here if patient entered correct password
+                    // sending current patient to session
                     session.setAttribute("patient", patient);
-                    Appointments appointment = new Appointments();
+                    // select appointment based on current patient
                     appointment.selectAppointment("patId", patient.getPatId());
+                    // if statement to check if patient has any appointment scheduled
                     if (appointment.getApptDateTime() == null){
+                        // no appointment
                         RequestDispatcher rd = request.getRequestDispatcher("/clientHomeNoAppointment.jsp");
                         rd.forward(request, response);
-                        
                     } else {
+                        // patient has appointment
                         RequestDispatcher rd = request.getRequestDispatcher("clientHome.jsp");
                         rd.forward(request, response);
                     }
                 } else {
+                    // user entered wrong password
                     RequestDispatcher rd = request.getRequestDispatcher("/errorLoginWrongPsw.jsp");
                     rd.forward(request, response);
                 } 
             } else {
+                // if statement to check if dentist entered correct password
                 if (enteredPassword.equals(dentist.getPassword())){
+                    // dentist entered corrent password
                     session.setAttribute("dentist", dentist);
                     RequestDispatcher rd = request.getRequestDispatcher("/dentistHome.jsp");
                     rd.forward(request, response);
                 } else {
+                    // dentist entered wrong password 
                     RequestDispatcher rd = request.getRequestDispatcher("/errorLoginWrongPsw.jsp");
                     rd.forward(request, response);
                 }

@@ -38,13 +38,19 @@ public class createAppointmentServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             
+            //creating new session
             HttpSession session = request.getSession();
+            // instatiating objects to be used in this servlet
             Appointments appointment = new Appointments();
             Patients patient = new Patients();
+            // getting current patient from session
             patient = (Patients)session.getAttribute("patient");
+            // selecting appointment based on current patient
             appointment.selectAppointment("patId", patient.getPatId());
+            // formating date obtained from page createAppointment.jsp
             String date = request.getParameter("datepicker") + " " + request.getParameter("time");
             
+            //if statement to determine if user is creating new appointment or editing existing one
             if(appointment.getApptDateTime() == null){
                 appointment.insertDB(date, patient.getPatId(), request.getParameter("dentist"), request.getParameter("procedure"));
             } else {
@@ -52,12 +58,12 @@ public class createAppointmentServlet extends HttpServlet {
                 appointment.insertDB(date, patient.getPatId(), request.getParameter("dentist"), request.getParameter("procedure"));
             }
             
-            
-            
+            // check used on createAppointment.jsp to check to see if user already has appointment
             String check = (String)session.getAttribute("check");
             check = null;
             session.setAttribute("check", check);
             
+            // forwarding to clientHome.jsp
             RequestDispatcher rd = request.getRequestDispatcher("clientHome.jsp");
             rd.forward(request, response);
         }

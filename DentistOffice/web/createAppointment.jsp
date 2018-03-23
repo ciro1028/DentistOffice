@@ -26,18 +26,28 @@
 </head>
 <body class="homeBody">
     <%  
+        // instantiating objects to be used in this jsp
         Patients patient = new Patients();
-        patient = (Patients)session.getAttribute("patient"); 
         Appointments appointment = new Appointments();
-        appointment.selectAppointment("patId", patient.getPatId());
         Dentists dentist = new Dentists();
-        dentist.selectDentist(appointment.getDentId());
         Procedures procedure = new Procedures();
+        //getting patient from session
+        patient = (Patients)session.getAttribute("patient"); 
+        
+        //selecting appointment based on current patient
+        appointment.selectAppointment("patId", patient.getPatId());
+        //selecting dentist based on appointment
+        dentist.selectDentist(appointment.getDentId());
+        // selecting procedure based on appointment
         procedure.selectProcedure(appointment.getProcCode());
         
+        //creating strings to serve display message to user
         String message = "Create your new appointment.";
         String message2 = "";
+        //getting a check from session to make sure that the patient already has an appointment
         String check = (String)session.getAttribute("check");
+        //if the patient doesn't have an appointement then a new appointment will be created
+        //if the patient has an appointement then the appointment will be deleted and a new one be created
         if(check != null) {
           message = "Choose new appointment"; 
           message2 = "Old appointment: " + appointment.getApptDateTime() + "        Dentist: " + dentist.getFirstName() + " " + dentist.getLastName() + "          Proc: " + procedure.getProcName();

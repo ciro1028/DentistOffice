@@ -18,11 +18,14 @@
 </head>
 <body class="homeBody">
     <%  
-        
+        // instatiating objects to be used within the page.
         Dentists dentist = new Dentists();
+        // getting current dentist from the session
         dentist = (Dentists)session.getAttribute("dentist");
+        // selecting current dentist from the database
         dentist.selectDentist(dentist.getId());
-
+        
+        //if statement to determine message to be shown when dentist edit its profile
         String successMsg = (String)session.getAttribute("successMsg");
         if (successMsg == null) {
             successMsg = "";

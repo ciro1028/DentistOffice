@@ -37,18 +37,21 @@ public class editDentistServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             
-            String successMsg = "User updated successfully!";
-            
+            //instatiating dentist
             Dentists dentist = new Dentists();
-            
+            // creating new session
             HttpSession session = request.getSession();
+            // getting current dentist from session
             dentist = (Dentists)session.getAttribute("dentist");
-            
+            // updating dentist profile in the database
             dentist.updateDentist(dentist.getId(), dentist.getPassword(), request.getParameter("fName"), request.getParameter("lName"), request.getParameter("email"), request.getParameter("office"));
-            
+            // message to be displayed when profile is updated
+            String successMsg = "User updated successfully!";
+            // sending objects to session
             session.setAttribute("successMsg", successMsg);
             session.setAttribute("dentist", dentist);
             
+            // forwarding to dentistProfile.jsp
             RequestDispatcher rd = request.getRequestDispatcher("/dentistProfile.jsp");
             rd.forward(request, response);
             

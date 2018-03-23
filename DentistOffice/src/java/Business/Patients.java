@@ -3,11 +3,6 @@ package Business;
 
 import java.sql.*;
 import javax.servlet.http.HttpSession;
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 /**
  *
@@ -16,10 +11,9 @@ import javax.servlet.http.HttpSession;
 
 /******************************
  * 
- * Class to handle Patients. Select patient and insert new patient.
+ * Class to handle Patients. Select patient, insert, and update patient.
  * 
  *****************************/
-
 public class Patients {
     private String patId;
     private String password;
@@ -38,7 +32,6 @@ public class Patients {
         email = "";
         insCo = "";
     }
-    
     
     /**********************
      * 

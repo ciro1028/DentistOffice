@@ -36,19 +36,23 @@ public class editPatientServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             
-            String successMsg = "User updated successfully!";
-            
+            //instatiating patient
             Patients patient = new Patients();
+            // creating new session
             HttpSession session = request.getSession();
+            // getting current patient from session
             patient = (Patients)session.getAttribute("patient");
-            
+            // updating patient profile in the database
             patient.updatePatient(patient.getPatId(), patient.getPassword(), request.getParameter("fName"), 
                     request.getParameter("lName"), request.getParameter("address"), request.getParameter("email"), 
                     request.getParameter("insCo"));
-            
+            // message to be displayed when profile is updated
+            String successMsg = "User updated successfully!";
+            // sending objects to session
             session.setAttribute("successMsg", successMsg);
             session.setAttribute("patient", patient);
             
+            // forwarding to patientProfile.jsp
             RequestDispatcher rd = request.getRequestDispatcher("/patientProfile.jsp");
             rd.forward(request, response);
             

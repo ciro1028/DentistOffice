@@ -24,13 +24,9 @@
 </head>
 <body class="homeBody">
     <%  
-     /********************
-     * 
-     * Instatiating objects to be used within the page.
-     * 
-     ********************/
-
+        // instatiating objects to be used within the page.
         Dentists dentist = new Dentists();
+        // getting dentist from the session
         dentist = (Dentists)session.getAttribute("dentist");
     %>
     

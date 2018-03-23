@@ -36,33 +36,39 @@ public class recoverPasswordServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             
-            String enteredUsername = request.getParameter("username");
-            
+            // instating objects to be used in this jsp
             Patients patient = new Patients();
-            patient.selectPatient(enteredUsername);
-            
             Dentists dentist = new Dentists();
+            // getting username entered by the user to recover password
+            String enteredUsername = request.getParameter("username");
+            // selecting patient from database based on username entered
+            patient.selectPatient(enteredUsername);
+            // selecting dentist from database based on username entered
             dentist.selectDentist(enteredUsername);
             
             String password = "";
             String user = "";
-            
+            //if statement to check if username entered is from a dentist, patient. or if it exists at all
             if (patient.getPatId() == null && dentist.getId() == null && enteredUsername != null){
+                // username does not exist
                 password = "This username is not registered.";
-                
             } else if (patient.getPatId() != null){
+                // username is from a patient
+                // showing username and password based on the username entered
                 password = "Your password is: " + patient.getPassword();
                 user = "Username: " + patient.getPatId();
-                
             } else {
+                // username is from a dentist
+                // showing username and password based on the username entered
                 password = "Your password is: " + dentist.getPassword();
                 user = "Username: " + dentist.getId();
             }
-            
+            // creating new session
             HttpSession session = request.getSession();
+            // sending objects to session
             session.setAttribute("password", password);
             session.setAttribute("user", user);
-            
+            // forwarding to forgotpassword.jsp
             RequestDispatcher rd = request.getRequestDispatcher("forgotPassword.jsp");
             rd.forward(request, response);
         }
