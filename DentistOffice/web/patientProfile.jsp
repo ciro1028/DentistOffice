@@ -38,10 +38,8 @@
         <div class="leftwrapper">
             <nav>
                 <ul id="sidemenu">
-                  <form action="http://localhost:8080/DentistOffice/logoutServlet">
-                    <li><a href="clientHomeNoAppointment.jsp">Home</a></li> 
-                  </form> 
-                  <li><a href="dentistProfile.jsp">Profile</a></li>
+                  <li><a href="clientHome.jsp">Home</a></li> 
+                  <li><a href="patientProfile.jsp">Profile</a></li>
                   <form action="http://localhost:8080/DentistOffice/logoutServlet">
                     <li><a href="index.html">Log out</a></li>
                   </form>
